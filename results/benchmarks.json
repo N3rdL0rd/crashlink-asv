@@ -1,0 +1,215 @@
+{
+    "control_flow.TimeCFGraphBuild.time_build": {
+        "code": "class TimeCFGraphBuild:\n    def time_build(self, name: str) -> None:\n        graph = cfg_mod.CFGraph(self.func)\n        graph.build()\n\n    def setup(self, name: str) -> None:\n        code = load(name)\n        self.func = code.get_test_main()",
+        "min_run_count": 2,
+        "name": "control_flow.TimeCFGraphBuild.time_build",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a515564f1aed7d83dc0111b1a210ef5bb2127541c643929324fadec56a796bea",
+        "warmup_time": -1
+    },
+    "control_flow.TimeCFGraphBuild.time_build_unthreaded_then_thread": {
+        "code": "class TimeCFGraphBuild:\n    def time_build_unthreaded_then_thread(self, name: str) -> None:\n        graph = cfg_mod.CFGraph(self.func)\n        graph.build(do_optimize=False)\n        cfg_mod.CFJumpThreader(graph).optimize()\n\n    def setup(self, name: str) -> None:\n        code = load(name)\n        self.func = code.get_test_main()",
+        "min_run_count": 2,
+        "name": "control_flow.TimeCFGraphBuild.time_build_unthreaded_then_thread",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e635cf4cc5e37fc454f981e67efdac56ae944d366669be764f4a7ef5251d1f57",
+        "warmup_time": -1
+    },
+    "control_flow.TimeShortCircuitChain.time_lift": {
+        "code": "class TimeShortCircuitChain:\n    def time_lift(self) -> None:\n        decomp.IRFunction(self.code, self.func)\n\n    def setup(self) -> None:\n        self.code = core.Bytecode.from_path(fixture(\"BenchShortCircuitChain\"))\n        self.func = self._guard_function()",
+        "min_run_count": 2,
+        "name": "control_flow.TimeShortCircuitChain.time_lift",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7f33a10728369d027700fc4ff227188ee7d35a21519d98ccbb3a0637789e4497",
+        "warmup_time": -1
+    },
+    "control_flow.TimeShortCircuitChain.time_pseudo": {
+        "code": "class TimeShortCircuitChain:\n    def time_pseudo(self) -> None:\n        pseudo_mod.pseudo(decomp.IRFunction(self.code, self.func))\n\n    def setup(self) -> None:\n        self.code = core.Bytecode.from_path(fixture(\"BenchShortCircuitChain\"))\n        self.func = self._guard_function()",
+        "min_run_count": 2,
+        "name": "control_flow.TimeShortCircuitChain.time_pseudo",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "ed37b95dea269533d73dd85559b13eb92bd05c08d1a6add0675f4c5f14438592",
+        "warmup_time": -1
+    },
+    "disasm.TimeDisassembleAll.time_disassemble_all": {
+        "code": "class TimeDisassembleAll:\n    def time_disassemble_all(self, name: str) -> None:\n        for func in self.code.functions:\n            disasm.func(self.code, func)\n\n    def setup(self, name: str) -> None:\n        self.code = load(name)",
+        "min_run_count": 2,
+        "name": "disasm.TimeDisassembleAll.time_disassemble_all",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'",
+                "'HeapsSkinSplit'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fffc13da71f4c66d047ce91b01eb5b8d264892ca12b5de32ca6b0412823583fa",
+        "warmup_time": -1
+    },
+    "hlc.TimeCodeToC.time_code_to_c": {
+        "code": "class TimeCodeToC:\n    def time_code_to_c(self, name: str) -> None:\n        hlc_mod.code_to_c(self.code)\n\n    def setup(self, name: str) -> None:\n        self.code = load(name)",
+        "min_run_count": 2,
+        "name": "hlc.TimeCodeToC.time_code_to_c",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'",
+                "'HeapsSkinSplit'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "387baf60cce8f3c52a840d91ffd6c99aaa499121102b820eb6ee1b1b6660b179",
+        "warmup_time": -1
+    },
+    "lifting.TimeLiftAll.time_lift_optimized": {
+        "code": "class TimeLiftAll:\n    def time_lift_optimized(self, name: str) -> None:\n        for func in self.code.functions:\n            decomp.IRFunction(self.code, func)\n\n    def setup(self, name: str) -> None:\n        self.code = load(name)",
+        "min_run_count": 2,
+        "name": "lifting.TimeLiftAll.time_lift_optimized",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'",
+                "'HeapsSkinSplit'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "701a856dbbb28ae4e95be87dfb338b87f3cf5cfc6bd99a7042adff7c6d513099",
+        "warmup_time": -1
+    },
+    "lifting.TimeLiftAll.time_lift_unoptimized": {
+        "code": "class TimeLiftAll:\n    def time_lift_unoptimized(self, name: str) -> None:\n        for func in self.code.functions:\n            decomp.IRFunction(self.code, func, do_optimize=False)\n\n    def setup(self, name: str) -> None:\n        self.code = load(name)",
+        "min_run_count": 2,
+        "name": "lifting.TimeLiftAll.time_lift_unoptimized",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'",
+                "'HeapsSkinSplit'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "ce5ff5d1ee9a31ba6913066d1afb8e5ebfc6f28724e283554880ab4630ac6ded",
+        "warmup_time": -1
+    },
+    "parsing.TimeFromPath.time_from_path": {
+        "code": "class TimeFromPath:\n    def time_from_path(self, name: str) -> None:\n        core.Bytecode.from_path(self.path)\n\n    def setup(self, name: str) -> None:\n        self.path = fixture(name)",
+        "min_run_count": 2,
+        "name": "parsing.TimeFromPath.time_from_path",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'",
+                "'HeapsSkinSplit'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "84a6ea63c05bfaf1d1da867581b012f389e2d5539c8b521438cb1001d5103b4a",
+        "warmup_time": -1
+    },
+    "pseudo_rendering.TimeDecompileAllClasses.time_decompile_all_classes": {
+        "code": "class TimeDecompileAllClasses:\n    def time_decompile_all_classes(self, name: str) -> None:\n        for obj in self.classes:\n            decomp.IRClass(self.code, obj).pseudo()\n\n    def setup(self, name: str) -> None:\n        self.code = load(name)\n        self.classes = classes_of(self.code)",
+        "min_run_count": 2,
+        "name": "pseudo_rendering.TimeDecompileAllClasses.time_decompile_all_classes",
+        "number": 0,
+        "param_names": [
+            "fixture"
+        ],
+        "params": [
+            [
+                "'BigControlFlow'",
+                "'BigCombo'",
+                "'HeapsSkinSplit'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fbd08fab359ea6582a55a61217c953d07d9459e67e41cd5cd02977887eb6c3e1",
+        "warmup_time": -1
+    },
+    "version": 2
+}
